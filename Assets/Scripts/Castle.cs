@@ -6,6 +6,7 @@ using UnityEngine.UI; //UI elementlerine eriþimimizi saðlýyor
 public class Castle : MonoBehaviour
 {
     public float totalHealth = 100f;
+    [HideInInspector]// public olan bir deðeri gizlememize yarýyor ve debugda da gözükmüyor
     public float currentHealth;
 
     public Slider healthSlider;
