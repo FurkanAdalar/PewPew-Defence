@@ -16,6 +16,8 @@ public class EnemyController : MonoBehaviour
 
     private Castle theCastle;
 
+    private int selectedAttackPoint;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,11 +48,14 @@ public class EnemyController : MonoBehaviour
                 if (currentPoint >= thePath.points.Length)
                 {
                     reachedEnd = true;
+
+                    selectedAttackPoint = Random.Range(0, theCastle.attackPoints.Length);
                 }
             }
         }
         else
         {
+            transform.position = Vector3.MoveTowards(transform.position, theCastle.attackPoints[selectedAttackPoint].position, moveSpeed * Time.deltaTime);
             attackCounter -= Time.deltaTime;
             if(attackCounter <= 0)
             {

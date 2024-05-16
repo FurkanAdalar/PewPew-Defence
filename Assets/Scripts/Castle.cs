@@ -9,6 +9,8 @@ public class Castle : MonoBehaviour
     private float currentHealth;
 
     public Slider healthSlider;
+
+    public Transform[] attackPoints;
     // Start is called before the first frame update
     void Start()
     {
