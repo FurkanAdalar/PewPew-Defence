@@ -19,10 +19,14 @@ public class EnemyController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        thePath = FindObjectOfType<Path>();
-
-        theCastle = FindObjectOfType<Castle>();
-
+        if (thePath == null)
+        {
+            thePath = FindObjectOfType<Path>();
+        }
+        if (theCastle == null)
+        {
+            theCastle = FindObjectOfType<Castle>();
+        }
         attackCounter = timeBetweenAttacks;
     }
 
@@ -55,5 +59,11 @@ public class EnemyController : MonoBehaviour
                 theCastle.TakeDamage(damagePerAttack);
             }
         }
+    }
+
+    public void Setup (Castle newCastle, Path newPath)// enemylerin hangi kaleye hangi yoldan gidebileceklerini seçmemize olanak saðlýyor Setup fonksiyonu.
+    {
+        theCastle = newCastle;
+        thePath = newPath;
     }
 }

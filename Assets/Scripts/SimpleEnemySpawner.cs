@@ -12,6 +12,9 @@ public class SimpleEnemySpawner : MonoBehaviour
     private float spawnCounter;
 
     public int amountToSpawn = 10; // kaç tane enemy spawn olucaðý
+
+    public Castle theCastle;
+    public Path thePath;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,8 +31,8 @@ public class SimpleEnemySpawner : MonoBehaviour
             {
                 spawnCounter = timeBetweenSpawns;
 
-                Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation);
-
+                Instantiate(enemyToSpawn, spawnPoint.position, spawnPoint.rotation).Setup(theCastle,thePath); //enemy controller type Instantiate
+                //enemy controllerýna castle ve path i atýyoruz istediðimiz þekilde gitmesini saðlamýþ oluyoruz.
                 amountToSpawn--; //spawn adedi 0 olana kadar counterý bir azaltýp sýfýr olduðunda daha fazla spawnlanmaz
             }
         }
