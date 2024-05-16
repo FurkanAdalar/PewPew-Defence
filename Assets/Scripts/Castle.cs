@@ -6,7 +6,7 @@ using UnityEngine.UI; //UI elementlerine eriþimimizi saðlýyor
 public class Castle : MonoBehaviour
 {
     public float totalHealth = 100f;
-    private float currentHealth;
+    public float currentHealth;
 
     public Slider healthSlider;
 

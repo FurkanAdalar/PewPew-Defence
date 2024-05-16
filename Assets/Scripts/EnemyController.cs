@@ -35,33 +35,35 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (!reachedEnd)
+        if (theCastle.currentHealth > 0)// castle caný 0dan büyük olduðu sürece enemyler hareket edebilir yoksa durur.
         {
-            transform.LookAt(thePath.points[currentPoint].position);// düþmanýn baktýðý yönü deðiþtiriyor
-
-            transform.position = Vector3.MoveTowards(transform.position, thePath.points[currentPoint].position, moveSpeed * Time.deltaTime);
-
-            if (Vector3.Distance(transform.position, thePath.points[currentPoint].position) < .01f)//distance between where we currently are
+            if (!reachedEnd)
             {
-                currentPoint = currentPoint + 1;
-                if (currentPoint >= thePath.points.Length)
-                {
-                    reachedEnd = true;
+                transform.LookAt(thePath.points[currentPoint].position);// düþmanýn baktýðý yönü deðiþtiriyor
 
-                    selectedAttackPoint = Random.Range(0, theCastle.attackPoints.Length);
+                transform.position = Vector3.MoveTowards(transform.position, thePath.points[currentPoint].position, moveSpeed * Time.deltaTime);
+
+                if (Vector3.Distance(transform.position, thePath.points[currentPoint].position) < .01f)//distance between where we currently are
+                {
+                    currentPoint = currentPoint + 1;
+                    if (currentPoint >= thePath.points.Length)
+                    {
+                        reachedEnd = true;
+
+                        selectedAttackPoint = Random.Range(0, theCastle.attackPoints.Length);
+                    }
                 }
             }
-        }
-        else
-        {
-            transform.position = Vector3.MoveTowards(transform.position, theCastle.attackPoints[selectedAttackPoint].position, moveSpeed * Time.deltaTime);
-            attackCounter -= Time.deltaTime;
-            if(attackCounter <= 0)
+            else
             {
-                attackCounter = timeBetweenAttacks;
+                transform.position = Vector3.MoveTowards(transform.position, theCastle.attackPoints[selectedAttackPoint].position, moveSpeed * Time.deltaTime);
+                attackCounter -= Time.deltaTime;
+                if (attackCounter <= 0)
+                {
+                    attackCounter = timeBetweenAttacks;
 
-                theCastle.TakeDamage(damagePerAttack);
+                    theCastle.TakeDamage(damagePerAttack);
+                }
             }
         }
     }
