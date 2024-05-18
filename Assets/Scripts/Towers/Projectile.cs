@@ -24,7 +24,7 @@ public class Projectile : MonoBehaviour
         if(other.tag == "Enemy" && !hasDamaged)
         {
             other.GetComponent<EnemyHealthController>().TakeDamage(damageAmount);
-            hasDamaged = true;
+            hasDamaged = true; // bu sayede tek seferde yalnýzca bir düþmana vurabilir.
         }
         Instantiate(impactEffect,transform.position,Quaternion.identity); // Quaternion.identity yerine transform.rotation da yazýlabilir
         //yukardaki quaternion.identity bize vector3 deðerini 000 a eþitliyor
