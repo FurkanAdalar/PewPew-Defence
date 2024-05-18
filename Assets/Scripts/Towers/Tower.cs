@@ -13,6 +13,9 @@ public class Tower : MonoBehaviour
     private float checkCounter;
     public float checkTime = .2f;
 
+    [HideInInspector]
+    public bool enemiesUpdated;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +25,8 @@ public class Tower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        enemiesUpdated = false;
+
         checkCounter -= Time.deltaTime; //her framede yenilemenin önüne geçerek biraz daha performasý geliþtiriyoruz
         if (checkCounter <= 0)
         {
@@ -34,6 +39,8 @@ public class Tower : MonoBehaviour
             {
                 enemiesInRange.Add(col.GetComponent<EnemyController>());
             }
+
+            enemiesUpdated = true;
         }
     }
 }

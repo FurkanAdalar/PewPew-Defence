@@ -29,7 +29,7 @@ public class ProjectileTower : MonoBehaviour
             //launcherModel.LookAt(target);
             launcherModel.rotation =Quaternion.Slerp(launcherModel.rotation, Quaternion.LookRotation(target.position - transform.position), 5f*Time.deltaTime); //bu kod cannon ýn targetlar arasý geçiþte smoothluk saðlýyor.
 
-            launcherModel.rotation = Quaternion.Euler(0f, launcherModel.rotation.eulerAngles.y, 0f);
+            launcherModel.rotation = Quaternion.Euler(0f, launcherModel.rotation.eulerAngles.y, 0f); //yukardaki veya çok aþaðýdaki bir targeta kitlendiðinde y ekseninde rotation haricini sýfýrlýyoruz ki saçma görüntüler oluþmasýn
         }
         shotCounter -= Time.deltaTime;
         if(shotCounter <= 0 && target != null)
@@ -40,26 +40,28 @@ public class ProjectileTower : MonoBehaviour
 
             Instantiate(projectile, firePoint.position, firePoint.rotation);
         }
-
-        if(theTower.enemiesInRange.Count > 0 )
+        if (theTower.enemiesUpdated)
         {
-            float minDistance = theTower.range + 1f; // min distance deðerini setledik
-            foreach(EnemyController enemy in theTower.enemiesInRange)
+            if (theTower.enemiesInRange.Count > 0)
             {
-                if(enemy != null)
+                float minDistance = theTower.range + 1f; // min distance deðerini setledik
+                foreach (EnemyController enemy in theTower.enemiesInRange)
                 {
-                    float distance = Vector3.Distance(transform.position, enemy.transform.position);
-                    if(distance < minDistance)
+                    if (enemy != null)
                     {
-                        minDistance = distance; //en yakýndaki enemy
-                        target = enemy.transform;// ayný þekilde transformuna
+                        float distance = Vector3.Distance(transform.position, enemy.transform.position);
+                        if (distance < minDistance)
+                        {
+                            minDistance = distance; //en yakýndaki enemy
+                            target = enemy.transform;// ayný þekilde transformuna
+                        }
                     }
                 }
             }
-        }
-        else
-        {
-            target = null;
+            else
+            {
+                target = null;
+            }
         }
     }
 }
