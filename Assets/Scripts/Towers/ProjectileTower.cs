@@ -13,6 +13,7 @@ public class ProjectileTower : MonoBehaviour
     private float shotCounter;
 
     private Transform target;
+    public Transform launcherModel;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,13 @@ public class ProjectileTower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(target != null)
+        {
+            //launcherModel.LookAt(target);
+            launcherModel.rotation =Quaternion.Slerp(launcherModel.rotation, Quaternion.LookRotation(target.position - transform.position), 5f*Time.deltaTime); //bu kod cannon ýn targetlar arasý geçiþte smoothluk saðlýyor.
+
+            launcherModel.rotation = Quaternion.Euler(0f, launcherModel.rotation.eulerAngles.y, 0f);
+        }
         shotCounter -= Time.deltaTime;
         if(shotCounter <= 0 && target != null)
         {
