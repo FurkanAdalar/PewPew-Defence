@@ -15,6 +15,7 @@ public class ProjectileTower : MonoBehaviour
     private Transform target;
     public Transform launcherModel;
 
+    public GameObject shotEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +40,7 @@ public class ProjectileTower : MonoBehaviour
             firePoint.LookAt(target);
 
             Instantiate(projectile, firePoint.position, firePoint.rotation);
+            Instantiate(shotEffect,firePoint.position, firePoint.rotation);
         }
         if (theTower.enemiesUpdated)
         {

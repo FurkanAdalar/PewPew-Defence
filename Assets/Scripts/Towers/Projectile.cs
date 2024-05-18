@@ -7,6 +7,9 @@ public class Projectile : MonoBehaviour
     public Rigidbody theRB;
     public float moveSpeed;
 
+    public GameObject impactEffect;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +18,8 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Instantiate(impactEffect,transform.position,Quaternion.identity); // Quaternion.identity yerine transform.rotation da yazýlabilir
+        //yukardaki quaternion.identity bize vector3 deðerini 000 a eþitliyor
         Destroy(gameObject);
     }
 
